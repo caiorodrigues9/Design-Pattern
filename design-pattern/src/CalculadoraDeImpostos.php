@@ -2,14 +2,12 @@
 
 namespace Caio\DesignPattern;
 
+use Caio\DesignPattern\Impostos\Imposto;
+
 class CalculadoraDeImpostos
 {
-    public function calculadora(Orcamento $orcamento, string $nome)
+    public function calculadora(Orcamento $orcamento, Imposto $imposto)
     {
-        return match($nome){
-            'ICMS'=> $orcamento->valor * 0.1,
-            'ISS'=> $orcamento->valor * 0.06,
-        };
-        return $orcamento->valor;
+        return $imposto->calculaImposto($orcamento);
     }
 }

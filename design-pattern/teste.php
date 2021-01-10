@@ -1,6 +1,8 @@
 <?php
 
 use Caio\DesignPattern\CalculadoraDeImpostos;
+use Caio\DesignPattern\Impostos\Icms;
+use Caio\DesignPattern\Impostos\Iss;
 use Caio\DesignPattern\Orcamento;
 
 require 'vendor/autoload.php';
@@ -11,5 +13,5 @@ $orcamento = new Orcamento();
 
 $orcamento->valor = 100;
 
-$caculadora->calculadora($orcamento,'ICMS');
+echo $caculadora->calculadora($orcamento,new Icms());
 
