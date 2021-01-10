@@ -2,31 +2,37 @@
 
 namespace Caio\DesignPattern;
 
+use Caio\DesignPattern\EstadosOrcamento\EmAprovacao;
+use Caio\DesignPattern\EstadosOrcamento\EstadoOrcamento;
+
 class Orcamento
 {
     public int $quantidadeItens;
     public float $valor;
-    public string $estadoAtual;
+    public EstadoOrcamento $estadoAtual;
+
+    public function __construct()
+    {
+        $this->estadoAtual = new EmAprovacao();
+    }
 
     public function aplicaDescontoExtra()
     {
-        $this->valor -= $this->calculaDescontoExtra();
+        $this->valor -= $this->estadoAtual->calculaDescontoExtra($this);
     }
 
-    public function calculaDescontoExtra(): float
+    public function aprova()
     {
-        if($this->estadoAtual == "EM APROVACAO"){
-            return $this->valor * 0.5;
-        }
-        
-        if($this->estadoAtual == "APROVADO"){
-            return $this->valor * 0.2;
-        }
+        $this->estadoAtual->aprova($this);
+    }
 
-        throw new \DomainException(
-            message:'Orçamentos aprovados e reprovados não podem receber desconto extras'
-        );
+    public function retprova()
+    {
+        $this->estadoAtual->reprova($this);
+    }
 
-
+    public function finaliza()
+    {
+        $this->estadoAtual->finaliza($this);
     }
 }
