@@ -10,6 +10,7 @@ class Orcamento
     public int $quantidadeItens;
     public float $valor;
     public EstadoOrcamento $estadoAtual;
+    
 
     public function __construct()
     {
