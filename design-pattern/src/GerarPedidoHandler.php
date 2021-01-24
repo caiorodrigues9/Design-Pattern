@@ -2,14 +2,22 @@
 
 namespace Caio\DesignPattern;
 
-
+use Caio\DesignPattern\AcoesAoGerarPedido\AcoesAoGerarPedido;
 use DateTimeImmutable;
 
 class GerarPedidoHandler
 {
+    /** @var AcaoAposGerarPedido[] */
+    private $acoesAposGerarPedido = [];
+
     public function __construct(/* Pedido Repository, Mail Service */)
     {
         
+    }
+
+    public function adicionaAcaoAoGerarPeido(AcoesAoGerarPedido $acao)
+    {
+        $this->acoesAposGerarPedido[] = $acao;
     }
 
     public function execute(GerarPedido $gerarPedido)
@@ -25,10 +33,13 @@ class GerarPedidoHandler
         $pedido->dataFinalizacao = new DateTimeImmutable();
         $pedido->orcamento = $orcamento;
         
-        //Pedido Repository para gravar os dados
-        echo "Cria pedido no Banco de Dados".PHP_EOL;
-        
-        //Mail Service encaminha e-mail
-        echo "Envia e-mail ao cliente".PHP_EOL;
+        $pedidoRepository = new GerarPedidoNoBanco();
+        $logGerarPedido = new GerarLog();
+        $enviarEmailPedido = new EnviarPedidoPorEmail();
+
+        foreach($this->acoesAposGerarPedido as $acao)
+        {
+            $acao->executaAcao($pedido);
+        }
     }
 }
