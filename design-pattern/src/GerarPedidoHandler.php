@@ -32,10 +32,6 @@ class GerarPedidoHandler
         $pedido->nomeCliente = $gerarPedido->getNomeCliente();
         $pedido->dataFinalizacao = new DateTimeImmutable();
         $pedido->orcamento = $orcamento;
-        
-        $pedidoRepository = new GerarPedidoNoBanco();
-        $logGerarPedido = new GerarLog();
-        $enviarEmailPedido = new EnviarPedidoPorEmail();
 
         foreach($this->acoesAposGerarPedido as $acao)
         {

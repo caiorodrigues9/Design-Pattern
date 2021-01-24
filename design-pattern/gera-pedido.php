@@ -1,6 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
+
 use Caio\DesignPattern\{GerarPedido, GerarPedidoHandler};
 use Caio\DesignPattern\AcoesAoGerarPedido\EnviarPedidoPorEmail;
 use Caio\DesignPattern\AcoesAoGerarPedido\GerarLog;
