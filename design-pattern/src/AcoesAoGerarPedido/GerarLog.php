@@ -3,11 +3,10 @@
 namespace Caio\DesignPattern\AcoesAoGerarPedido;
 
 use Caio\DesignPattern\Pedido;
-use SplSubject;
 
-class GerarLog implements \SplObserver
+class GerarLog implements AcoesAoGerarPedido
 {
-    public function update(\SplSubject $pedido): void
+    public function executaAcao(Pedido $pedido): void
     {
         echo "Gerando log do Pedido";
     }

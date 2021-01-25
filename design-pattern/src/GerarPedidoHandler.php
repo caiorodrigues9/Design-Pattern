@@ -4,13 +4,12 @@ namespace Caio\DesignPattern;
 
 use Caio\DesignPattern\AcoesAoGerarPedido\AcoesAoGerarPedido;
 use DateTimeImmutable;
-use SplObserver;
 
-class GerarPedidoHandler implements \SplSubject
+
+class GerarPedidoHandler
 {
-    /** @var SplSubject[] */
+    /** @var AcoesAoGerarPedido[] */
     private $acoesAposGerarPedido = [];
-    public Pedido $pedido;
 
     public function __construct(/* Pedido Repository, Mail Service */)
     {
@@ -29,26 +28,17 @@ class GerarPedidoHandler implements \SplSubject
         $pedido->nomeCliente = $gerarPedido->getNomeCliente();
         $pedido->dataFinalizacao = new DateTimeImmutable();
         $pedido->orcamento = $orcamento;
-        $this->pedido = $pedido;
-        $this->notify();
-    }
 
-    public function attach(SplObserver $observer)
-    {
-        $this->acoesAposGerarPedido[] = $observer;
-    }
-
-    public function detach(SplObserver $observer)
-    {
-        
-    }
-    
-    public function notify()
-    {
         foreach($this->acoesAposGerarPedido as $acao)
         {
-            $acao->update($this);
+            $acao->executaAcao($pedido);
         }
+    
+    }
+
+    public function adicionaAcaoAoGerarPeido(AcoesAoGerarPedido $acao)
+    {
+        $this->acoesAposGerarPedido[] = $acao;
     }
 
 }

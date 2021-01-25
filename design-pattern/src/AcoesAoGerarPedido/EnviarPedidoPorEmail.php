@@ -3,13 +3,11 @@
 namespace Caio\DesignPattern\AcoesAoGerarPedido;
 
 use Caio\DesignPattern\Pedido;
-use SplSubject;
 
-class EnviarPedidoPorEmail implements \SplObserver
+class EnviarPedidoPorEmail implements AcoesAoGerarPedido
 {
-    public function update(\SplSubject $pedido): void
+    public function executaAcao(Pedido $pedido): void
     {
-        echo $pedido->pedido->nomeCliente;
         echo "Enviando Email de Pedido Gerado";
     }
 }
