@@ -3,10 +3,11 @@
 namespace Caio\DesignPattern\AcoesAoGerarPedido;
 
 use Caio\DesignPattern\Pedido;
+use SplSubject;
 
-class GerarPedidoNoBanco implements AcoesAoGerarPedido
+class GerarPedidoNoBanco implements \SplObserver
 {
-    public function executaAcao(Pedido $pedido): void
+    public function update(\SplSubject $pedido): void
     {
         echo "Salvando Pedido no banco de dados";
     }
