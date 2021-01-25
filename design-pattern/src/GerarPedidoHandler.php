@@ -10,6 +10,7 @@ class GerarPedidoHandler implements \SplSubject
 {
     /** @var SplSubject[] */
     private $acoesAposGerarPedido = [];
+    public Pedido $pedido;
 
     public function __construct(/* Pedido Repository, Mail Service */)
     {
@@ -28,6 +29,8 @@ class GerarPedidoHandler implements \SplSubject
         $pedido->nomeCliente = $gerarPedido->getNomeCliente();
         $pedido->dataFinalizacao = new DateTimeImmutable();
         $pedido->orcamento = $orcamento;
+        $this->pedido = $pedido;
+        $this->notify();
     }
 
     public function attach(SplObserver $observer)
@@ -44,7 +47,7 @@ class GerarPedidoHandler implements \SplSubject
     {
         foreach($this->acoesAposGerarPedido as $acao)
         {
-            $acao->update();
+            $acao->update($this);
         }
     }
 
