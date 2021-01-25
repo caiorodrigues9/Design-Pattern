@@ -1,9 +1,11 @@
 <?php
 
 namespace Caio\DesignPattern;
-use Caio\DesignPattern\{Pedido,Orcamento,Command};
 
-class GerarPedido implements Command
+
+use DateTimeImmutable;
+
+class GerarPedido
 {
     private float $valorDoPedido;
     private int $numeroItens;
@@ -30,10 +32,25 @@ class GerarPedido implements Command
         $pedido = new Pedido();
 
         $pedido->nomeCliente = $this->nomeCliente;
-        $pedido->dataFinalizacao = new \DateTimeImmutable();
+        $pedido->dataFinalizacao = new DateTimeImmutable();
         $pedido->orcamento = $orcamento;
 
         echo "Cria pedido no Banco de Dados".PHP_EOL;
         echo "Envia e-mail ao cliente".PHP_EOL;
+    }
+
+    public function getValorDoPedido(): float
+    {
+        return $this->valorDoPedido;
+    }
+
+    public function getNumeroItens(): int
+    {
+        return $this->numeroItens;
+    }
+
+    public function getNomeCliente(): string
+    {
+        return $this->nomeCliente;
     }
 }
