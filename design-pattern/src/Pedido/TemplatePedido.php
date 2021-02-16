@@ -1,8 +1,8 @@
 <?php
 
-namespace Caio\DesignPattern;
+namespace Caio\DesignPattern\Pedido;
 
-class DadosExtrinsecosPedidos
+class TemplatePedido
 {
     private string $nomeCliente;
     private \DateTimeInterface $dataFinalizacao;

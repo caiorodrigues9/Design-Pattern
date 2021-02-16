@@ -1,20 +1,24 @@
 <?php
 
-use Caio\DesignPattern\DadosExtrinsecosPedidos;
+use Caio\DesignPattern\Pedido\TemplatePedido;
 use Caio\DesignPattern\Orcamento;
-use Caio\DesignPattern\Pedido;
+use Caio\DesignPattern\Pedido\CriadorDePedido;
+use Caio\DesignPattern\Pedido\Pedido;
 
 require_once 'vendor/autoload.php';
 
 
-$dados = new DadosExtrinsecosPedidos(md5((string) rand(1,1000000) ),new \DateTimeImmutable());
+$criadorPedido = new CriadorDePedido();
 
 $pedidos = [];
 
 for($i = 0; $i < 10000; $i++) {
-    $pedido = new Pedido();
-    $pedido->dados = $dados;
-    $pedido->orcamento = new Orcamento();
+    $orcamento = new Orcamento();
+    $pedido = $criadorPedido->criaPedido(
+        'Caio Rodrigues',
+        date('Y-m-d'),
+        $orcamento
+    );
    
     $pedidos[] = $pedido;
 }

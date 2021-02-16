@@ -1,11 +1,11 @@
 <?php
 
-namespace Caio\DesignPattern;
+namespace Caio\DesignPattern\Pedido;
 
 use Caio\DesignPattern\Orcamento;
 
 class Pedido
 {
-    public DadosExtrinsecosPedidos $dados;
+    public TemplatePedido $template;
     public Orcamento $orcamento;
 }
