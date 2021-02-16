@@ -18,7 +18,7 @@ $orcamento = new Orcamento();
 $orcamento->valor = 600;
 $orcamento->quantidadeItens = 2;
 
-echo $caculadora->calculadora($orcamento,new Ikcv());
+echo $caculadora->calculadora($orcamento,new Icms());
 
 /*
 $calculadora = new CalculadoraDeDescontos();
