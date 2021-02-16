@@ -1,5 +1,6 @@
 <?php
 
+use Caio\DesignPattern\CacheOrcamentoProxy;
 use Caio\DesignPattern\ItemOrcamento;
 use Caio\DesignPattern\Orcamento;
 
@@ -24,4 +25,19 @@ $orcamentoAntigo->adicionaItem($item3);
 
 $orcamento->adicionaItem($orcamentoAntigo);
 
-echo $orcamento->valor();
+$orcamentoMaisAntigo = new Orcamento();
+$item4 = new ItemOrcamento();
+$item4->valor = 100;
+
+$item5 = new ItemOrcamento();
+$item5->valor = 50;
+
+$orcamentoMaisAntigo->adicionaItem($item4);
+$orcamentoMaisAntigo->adicionaItem($item5);
+
+$orcamento->adicionaItem($orcamentoMaisAntigo);
+
+$orcamentoCache = new CacheOrcamentoProxy($orcamento);
+
+echo $orcamentoCache->valor().PHP_EOL;
+echo $orcamentoCache->valor();
